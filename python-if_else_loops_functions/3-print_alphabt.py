@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-str = ""
-for letter in range(97, 123):
-    if chr(letter) not in ['q', 'e']:
-        str += chr(letter)
+alphabet = ""
+for ascii_value in range(97, 123):
+    if chr(ascii_value) not in ['q', 'e']:
+        alphabet += chr(ascii_value)
 
-print("{}".format(str), end="")
+print("{}".format(alphabet), end="")
