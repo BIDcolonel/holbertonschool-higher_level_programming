@@ -1,6 +1,6 @@
 # Python - More Classes and Objects
 
-## General
+## General
 *   Why Python programming is awesome
 *   What is OOP
 *   “first-class everything”
@@ -29,7 +29,7 @@
 *   How to use the getattr function
 
 ## Requirements
-### General
+### General
 
 *   Allowed editors: vi, vim, emacs
 *   All your files will be interpreted/compiled on Ubuntu 20.04 LTS using python3 (version 3.8.5)
