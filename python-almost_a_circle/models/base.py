@@ -14,3 +14,4 @@ class Base:
         else:
             Base.__nb_objects += 1
             self.id = Base.__nb_objects
+# above this line: Task 1
