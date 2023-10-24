@@ -7,7 +7,16 @@ class Rectangle(Base):
     """A representation of the Rectangle class"""
 
     def __init__(self, width, height, x=0, y=0, id=None):
-        """Constructor"""
+        """
+        Initializes instances
+
+        Args:
+            width (int): width of this Rectangle
+            height (int): height of this Rectangle
+            x (int, optional): x of this Rectangle. Defaults to 0.
+            y (int, optional): y of this Rectangle. Defaults to 0.
+            id (_type_, optional): id of the object. Defaults to None.
+        """
         super().__init__(id)
         self.width = width
         self.height = height
@@ -66,6 +75,15 @@ class Rectangle(Base):
 # above this line: Task 3
 
     def area(self):
-        """Computes area of this Rectangle"""
+        """Returns area of this Rectangle"""
         return self.width * self.height
 # above this line: Task 4
+
+    def display(self):
+        """Displays a Rectangle"""
+        rectangle = self.y * "\n"
+        for index in range(self.height):
+            rectangle += (" " * self.x)
+            rectangle += ("#" * self.width) + "\n"
+        print(rectangle, end='')
+# above this line: Task 5 and 7
