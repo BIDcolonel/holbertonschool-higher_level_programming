@@ -2,6 +2,7 @@
 """Module for Base class"""
 import json
 
+
 class Base:
     """A representation of the base of our OOP hierarchy"""
 
