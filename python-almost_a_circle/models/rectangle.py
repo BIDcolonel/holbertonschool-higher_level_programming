@@ -60,7 +60,12 @@ class Rectangle(Base):
         if type(value) != int:
             raise TypeError("{} must be an integer".format(name))
         if eq and value < 0:
-            raise ValueError("{} must be >= 0".fomat(name))
+            raise ValueError("{} must be >= 0".format(name))
         elif not eq and value <= 0:
             raise ValueError("{} must be > 0".format(name))
 # above this line: Task 3
+
+    def area(self):
+        """Computes area of this Rectangle"""
+        return self.width * self.height
+# above this line: Task 4
