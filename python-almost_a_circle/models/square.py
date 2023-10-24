@@ -55,3 +55,12 @@ class Square(Rectangle):
                 else:
                     setattr(self, key, value)
 # above this line: Task 12
+
+    def to_dictionary(self):
+        """Returns dictionnary representation of this class"""
+        list_atr = ['id', 'size', 'x', 'y']
+        dict_res = {}
+        for key in list_atr:
+            dict_res[key] = getattr(self, key)
+        return dict_res
+# above this line: Task 14
