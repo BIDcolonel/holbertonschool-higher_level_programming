@@ -96,3 +96,14 @@ class Rectangle(Base):
         str_wh = "{}/{}".format(self.width, self.height)
         return str_rectangle + str_id + str_xy + str_wh
 # above this line: Task 6
+
+    def update(self, *args, **kwargs):
+        """Update method"""
+        if args is not None and len(args) != 0:
+            list_atr = ['id', 'width', 'height', 'x', 'y']
+            for index in range(len(args)):
+                setattr(self, list_atr[index], args[index])
+        else:
+            for key, value in kwargs.items():
+                setattr(self, key, value)
+# above this line: Task 8 and 9
