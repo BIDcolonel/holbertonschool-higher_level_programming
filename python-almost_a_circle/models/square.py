@@ -23,7 +23,7 @@ class Square(Rectangle):
         str_square = "[Square] "
         str_id = "({}) ".format(self.id)
         str_xy = "{}/{} - ".format(self.x, self.y)
-        str_size = "{}".format(self.width)
+        str_size = "{}".format(self.size)
         return str_square + str_id + str_xy + str_size
 
     @property
@@ -36,3 +36,22 @@ class Square(Rectangle):
         self.width = value
         self.height = value
 # above this line: Task 10 and 11
+
+    def update(self, *args, **kwargs):
+        """Update method"""
+        if args is not None and len(args) != 0:
+            list_atr = ['id', 'size', 'x', 'y']
+            for index in range(len(args)):
+                if list_atr[index] == 'size':
+                    setattr(self, 'width', args[index])
+                    setattr(self, 'height', args[index])
+                else:
+                    setattr(self, list_atr[index], args[index])
+        else:
+            for key, value in kwargs.items():
+                if key == 'size':
+                    setattr(self, 'width', value)
+                    setattr(self, 'height', value)
+                else:
+                    setattr(self, key, value)
+# above this line: Task 12
