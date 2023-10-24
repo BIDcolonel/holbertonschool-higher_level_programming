@@ -109,7 +109,7 @@ class Rectangle(Base):
 # above this line: Task 8 and 9
 
     def to_dictionary(self):
-        """Returns dictionnary representation of this class"""
+        """Returns dictionary representation of this class"""
         list_atr = ['id', 'width', 'height', 'x', 'y']
         dict_res = {}
         for key in list_atr:
