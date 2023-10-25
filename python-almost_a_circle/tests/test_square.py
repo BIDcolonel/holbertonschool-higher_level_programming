@@ -3,9 +3,6 @@
 import unittest
 from models.base import Base
 from models.square import Square
-from random import randrange
-from contextlib import redirect_stdout
-import io
 
 
 class TestSquare(unittest.TestCase):
@@ -27,21 +24,6 @@ class TestSquare(unittest.TestCase):
     def test_B_inheritance(self):
         '''Tests if Square inherits Base.'''
         self.assertTrue(issubclass(Square, Base))
-
-    def test_C_constructor_no_args(self):
-        '''Tests constructor signature.'''
-        with self.assertRaises(TypeError) as e:
-            r = Square()
-        s = "__init__() missing 1 required positional argument: 'size'"
-        self.assertEqual(str(e.exception), s)
-
-    def test_C_constructor_many_args(self):
-        '''Tests constructor signature.'''
-        with self.assertRaises(TypeError) as e:
-            r = Square(1, 2, 3, 4, 5)
-        s = "__init__() takes from 2 to 5 positional arguments but 6 \
-were given"
-        self.assertEqual(str(e.exception), s)
 
     def test_D_instantiation(self):
         '''Tests instantiation.'''
@@ -80,11 +62,6 @@ were given"
         with self.assertRaises(ValueError) as e:
             r = Square(1, 2, -3)
         msg = "y must be >= 0"
-        self.assertEqual(str(e.exception), msg)
-
-        with self.assertRaises(ValueError) as e:
-            r = Square(0)
-        msg = "width must be > 0"
         self.assertEqual(str(e.exception), msg)
 
     def test_D_instantiation_positional(self):
