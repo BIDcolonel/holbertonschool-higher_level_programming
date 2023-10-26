@@ -83,6 +83,21 @@ class TestRectangleMethods(unittest.TestCase):
         with self.assertRaises(TypeError):
             new = Rectangle("2", 2, 2, 2, 2)
 
+    def test_valide_attrs_2(self):
+        """ Trying to pass a string value """
+        with self.assertRaises(TypeError):
+            new = Rectangle(2, "2", 2, 2, 2)
+
+    def test_valide_attrs_3(self):
+        """ Trying to pass a string value """
+        with self.assertRaises(TypeError):
+            new = Rectangle(2, 2, "2", 2, 2)
+
+    def test_valide_attrs_4(self):
+        """ Trying to pass a string value """
+        with self.assertRaises(TypeError):
+            new = Rectangle(2, 2, 2, "2", 2)
+
     def test_value_attrs(self):
         """ Trying to pass invalid values """
         with self.assertRaises(ValueError):
