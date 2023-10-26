@@ -155,6 +155,34 @@ class TestRectangleMethods(unittest.TestCase):
             r1.display()
             self.assertEqual(str_out.getvalue(), res)
 
+    def test_display_3(self):
+        """ Test string printed """
+        r1 = Rectangle(5, 4, 1, 1)
+        res = "\n #####\n #####\n #####\n #####\n"
+        with patch('sys.stdout', new=StringIO()) as str_out:
+            r1.display()
+            self.assertEqual(str_out.getvalue(), res)
+
+    def test_display_4(self):
+        """ Test string printed """
+        r1 = Rectangle(3, 2)
+        res = "###\n###\n"
+        with patch('sys.stdout', new=StringIO()) as str_out:
+            r1.display()
+            self.assertEqual(str_out.getvalue(), res)
+
+        r1.x = 4
+        res = "    ###\n    ###\n"
+        with patch('sys.stdout', new=StringIO()) as str_out:
+            r1.display()
+            self.assertEqual(str_out.getvalue(), res)
+
+        r1.y = 2
+        res = "\n\n    ###\n    ###\n"
+        with patch('sys.stdout', new=StringIO()) as str_out:
+            r1.display()
+            self.assertEqual(str_out.getvalue(), res)
+
         r1.width = 5
         res = "#####\n#####\n"
         with patch('sys.stdout', new=StringIO()) as str_out:
@@ -184,6 +212,32 @@ class TestRectangleMethods(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as str_out:
             print(r1)
             self.assertEqual(str_out.getvalue(), res)
+
+    def test_str_3(self):
+        """ Test __str__ return value """
+        r1 = Rectangle(5, 10)
+        res = "[Rectangle] (1) 0/0 - 5/10\n"
+        with patch('sys.stdout', new=StringIO()) as str_out:
+            print(r1)
+            self.assertEqual(str_out.getvalue(), res)
+
+        r2 = Rectangle(25, 86, 4, 7)
+        res = "[Rectangle] (2) 4/7 - 25/86\n"
+        with patch('sys.stdout', new=StringIO()) as str_out:
+            print(r2)
+            self.assertEqual(str_out.getvalue(), res)
+
+        r3 = Rectangle(1, 1, 1, 1)
+        res = "[Rectangle] (3) 1/1 - 1/1\n"
+        with patch('sys.stdout', new=StringIO()) as str_out:
+            print(r3)
+            self.assertEqual(str_out.getvalue(), res)
+
+    def test_str_4(self):
+        """ Test __str__ return value """
+        r1 = Rectangle(3, 3)
+        res = "[Rectangle] (1) 0/0 - 3/3"
+        self.assertEqual(r1.__str__(), res)
 
     def test_to_dictionary(self):
         """ Test dictionary returned """
@@ -248,3 +302,105 @@ class TestRectangleMethods(unittest.TestCase):
 
         for i in range(len(linput)):
             self.assertEqual(linput[i].__str__(), loutput[i].__str__())
+
+    def test_update_with_positional_args(self):
+        """ Test update method with positional arguments """
+        new = Rectangle(1, 1)
+        new.update(2, 3, 4, 5, 6)
+        self.assertEqual(new.width, 3)
+        self.assertEqual(new.height, 4)
+        self.assertEqual(new.x, 5)
+        self.assertEqual(new.y, 6)
+        self.assertEqual(new.id, 2)
+
+    def test_update_with_named_args(self):
+        """ Test update method with named arguments (kwargs) """
+        new = Rectangle(1, 1)
+        new.update(width=3, height=4, x=5, y=6, id=2)
+        self.assertEqual(new.width, 3)
+        self.assertEqual(new.height, 4)
+        self.assertEqual(new.x, 5)
+        self.assertEqual(new.y, 6)
+        self.assertEqual(new.id, 2)
+
+    def test_to_dictionary(self):
+        """ Test to_dictionary method """
+        new = Rectangle(2, 3, 4, 5, 6)
+        dictionary = new.to_dictionary()
+        self.assertEqual(dictionary['width'], 2)
+        self.assertEqual(dictionary['height'], 3)
+        self.assertEqual(dictionary['x'], 4)
+        self.assertEqual(dictionary['y'], 5)
+        self.assertEqual(dictionary['id'], 6)
+
+    def test_edge_cases(self):
+        """ Test edge cases for attribute values """
+        r1 = Rectangle(1, 1, 0, 0)
+        self.assertEqual(r1.width, 1)
+        self.assertEqual(r1.height, 1)
+        self.assertEqual(r1.x, 0)
+        self.assertEqual(r1.y, 0)
+
+        r2 = Rectangle(2 ** 31 - 1, 2 ** 31 - 1, 2 ** 31 - 1, 2 ** 31 - 1)
+        self.assertEqual(r2.width, 2 ** 31 - 1)
+        self.assertEqual(r2.height, 2 ** 31 - 1)
+        self.assertEqual(r2.x, 2 ** 31 - 1)
+        self.assertEqual(r2.y, 2 ** 31 - 1)
+
+    def test_area(self):
+        """ Test area method """
+        new = Rectangle(4, 5)
+        self.assertEqual(new.area(), 20)
+
+    def test_display(self):
+        """ Test display method """
+        r1 = Rectangle(2, 5)
+        expected_output = "##\n##\n##\n##\n##\n"
+        with patch('sys.stdout', new=StringIO()) as captured_output:
+            r1.display()
+            self.assertEqual(captured_output.getvalue(), expected_output)
+
+    def test_str(self):
+        """ Test __str__ method """
+        r1 = Rectangle(2, 5, 2, 4)
+        expected_str = "[Rectangle] (1) 2/4 - 2/5\n"
+        with patch('sys.stdout', new=StringIO()) as captured_output:
+            str_representation = str(r1)
+            self.assertEqual(captured_output.getvalue(), expected_str)
+
+    def test_create(self):
+        """ Test create method """
+        dictionary = {'id': 89, 'width': 3, 'height': 4, 'x': 5, 'y': 6}
+        r1 = Rectangle.create(**dictionary)
+        self.assertEqual(r1.id, 89)
+        self.assertEqual(r1.width, 3)
+        self.assertEqual(r1.height, 4)
+        self.assertEqual(r1.x, 5)
+        self.assertEqual(r1.y, 6)
+
+    def test_load_from_file(self):
+        """ Test load_from_file method """
+        load_file = Rectangle.load_from_file()
+        self.assertEqual(load_file, [])
+
+    def test_save_to_file(self):
+        """ Test save_to_file method """
+        r1 = Rectangle(2, 3)
+        r2 = Rectangle(4, 5, 1, 1, 2)
+        rectangles = [r1, r2]
+
+        filename = "test_rectangles.json"
+        Rectangle.save_to_file(rectangles, filename)
+
+        with open(filename, "r") as file:
+            file_content = file.read()
+            expected_json = '[{"id": 1, "width": 2, "height": 3, "x": 0, "y": 0}, {"id": 2, "width": 4, "height": 5, "x": 1, "y": 1}]'
+            self.assertEqual(file_content, expected_json)
+
+    def test_error_cases(self):
+        """ Test error cases (e.g., passing invalid values) """
+        with self.assertRaises(ValueError):
+            r1 = Rectangle(-1, 2)
+
+if __name__ == '__main__':
+    unittest.main()
