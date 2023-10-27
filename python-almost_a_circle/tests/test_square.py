@@ -417,5 +417,11 @@ class test_square(unittest.TestCase):
             content = file.read()
             self.assertEqual(content, "[]")
 
+    def test_size_property(self):
+        """Test the size property setter"""
+        self.s.size = 7  # Modifiez la taille (size)
+        self.assertEqual(self.s.width, 7)  # Vérifiez si width a été mis à jour
+        self.assertEqual(self.s.height, 7)
+
 if __name__ == '__main__':
     unittest.main()
