@@ -93,3 +93,78 @@ class TestBaseMethods(unittest.TestCase):
         Rectangle.save_to_file([])
         with open("Rectangle.json", "r") as file:
             self.assertEqual(file.read(), "[]")
+
+    def test_to_json_string_empty_list(self):
+        """ Test to_json_string with an empty list """
+        empty_list = []
+        json_string = Base.to_json_string(empty_list)
+        self.assertEqual(json_string, "[]")
+
+    def test_to_json_string_non_empty_list(self):
+        """ Test to_json_string with a non-empty list """
+        data = [{"key": "value"}, {"key2": "value2"}]
+        json_string = Base.to_json_string(data)
+        self.assertEqual(json_string, '[{"key": "value"}, {"key2": "value2"}]')
+
+    def test_save_to_file_empty_list(self):
+        """ Test save_to_file with an empty list of objects """
+        Rectangle.save_to_file([])
+
+        with open("Rectangle.json", "r") as file:
+            json_data = file.read()
+            self.assertEqual(json_data, "[]")
+
+        try:
+            os.remove("Rectangle.json")
+        except:
+            pass
+
+    def test_from_json_string_empty_string(self):
+        """ Test from_json_string with an empty JSON string """
+        json_string = ""
+        result = Base.from_json_string(json_string)
+        self.assertEqual(result, [])
+
+    def test_from_json_string_valid_string(self):
+        """ Test from_json_string with a valid JSON string """
+        json_string = '[{"key": "value"}, {"key2": "value2"}]'
+        result = Base.from_json_string(json_string)
+        expected = [{"key": "value"}, {"key2": "value2"}]
+        self.assertEqual(result, expected)
+
+    def test_create_rectangle(self):
+        """ Test create method with a dictionary to create a Rectangle instance """
+        dictionary = {"width": 5, "height": 10, "x": 2, "y": 3, "id": 1}
+        rectangle_instance = Rectangle.create(**dictionary)
+        self.assertEqual(rectangle_instance.width, 5)
+        self.assertEqual(rectangle_instance.height, 10)
+        self.assertEqual(rectangle_instance.x, 2)
+        self.assertEqual(rectangle_instance.y, 3)
+        self.assertEqual(rectangle_instance.id, 1)
+
+    def test_create_square(self):
+        """ Test create method with a dictionary to create a Square instance """
+        dictionary = {"size": 4, "x": 2, "y": 3, "id": 1}
+        square_instance = Square.create(**dictionary)
+        self.assertEqual(square_instance.size, 4)
+        self.assertEqual(square_instance.x, 2)
+        self.assertEqual(square_instance.y, 3)
+        self.assertEqual(square_instance.id, 1)
+
+    def test_load_from_file_non_existing_file(self):
+        """ Test load_from_file with a non-existing JSON file """
+        result = Rectangle.load_from_file()
+        self.assertEqual(result, [])
+
+    def test_load_from_file_empty_file(self):
+        """ Test load_from_file with an empty JSON file """
+        with open("Rectangle.json", "w") as file:
+            file.write("")
+
+        result = Rectangle.load_from_file()
+        self.assertEqual(result, [])
+
+        try:
+            os.remove("Rectangle.json")
+        except:
+            pass
