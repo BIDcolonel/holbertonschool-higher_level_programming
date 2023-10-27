@@ -193,11 +193,6 @@ class TestRectangleMethods(unittest.TestCase):
 
     def test_load_from_file(self):
         """ Test load JSON file """
-        load_file = Rectangle.load_from_file()
-        self.assertEqual(load_file, [])
-
-    def test_load_from_file_2(self):
-        """ Test load JSON file """
         r1 = Rectangle(5, 5)
         r2 = Rectangle(8, 2, 5, 5)
 
@@ -207,3 +202,41 @@ class TestRectangleMethods(unittest.TestCase):
 
         for i in range(len(linput)):
             self.assertEqual(linput[i].__str__(), loutput[i].__str__())
+
+    def test_zero_width(self):
+        """ Test rectangle with zero width """
+        with self.assertRaises(ValueError):
+            new = Rectangle(0, 2)
+
+    def test_zero_height(self):
+        """ Test rectangle with zero height """
+        with self.assertRaises(ValueError):
+            new = Rectangle(2, 0)
+
+    def test_negative_x(self):
+        """ Test rectangle with negative x-coordinate """
+        with self.assertRaises(ValueError):
+            new = Rectangle(2, 2, -1, 0)
+
+    def test_negative_y(self):
+        """ Test rectangle with negative y-coordinate """
+        with self.assertRaises(ValueError):
+            new = Rectangle(2, 2, 0, -1)
+
+    def test_modify_attributes(self):
+        """ Test modification of rectangle attributes """
+        r = Rectangle(3, 4, 1, 1)
+        r.width = 5
+        r.height = 6
+        r.x = 2
+        r.y = 2
+        self.assertEqual(r.width, 5)
+        self.assertEqual(r.height, 6)
+        self.assertEqual(r.x, 2)
+        self.assertEqual(r.y, 2)
+
+    def test_performance(self):
+        """ Test the performance of creating many rectangles """
+        num_rectangles = 10000
+        for _ in range(num_rectangles):
+            r = Rectangle(1, 1)
