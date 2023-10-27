@@ -168,3 +168,9 @@ class TestBaseMethods(unittest.TestCase):
             os.remove("Rectangle.json")
         except:
             pass
+
+    def test_create_with_empty_dictionary(self):
+        """ Test create method with an empty dictionary """
+        dictionary = {}
+        new_instance = Base.create(**dictionary)
+        self.assertIsNone(new_instance)

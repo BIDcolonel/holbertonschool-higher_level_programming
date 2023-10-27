@@ -58,7 +58,8 @@ class Base:
             new = Square(1)
         else:
             new = None
-        new.update(**dictionary)
+        if new:
+            new.update(**dictionary)
         return new
 # above this line: Task 18
 
