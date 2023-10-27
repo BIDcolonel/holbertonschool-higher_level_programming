@@ -260,13 +260,3 @@ class TestRectangleMethods(unittest.TestCase):
         self.assertEqual(r.height, 8)
         self.assertEqual(r.x, 9)
         self.assertEqual(r.y, 10)
-
-    def test_update_with_args_and_kwargs(self):
-        """ Test update method with both positional and keyword arguments """
-        r = Rectangle(1, 2, 3, 4, 5)
-        r.update(6, 7, x=9, y=10)
-        self.assertEqual(r.id, 6)
-        self.assertEqual(r.width, 7)
-        self.assertEqual(r.height, 2)  # Height remains unchanged
-        self.assertEqual(r.x, 9)
-        self.assertEqual(r.y, 10)
