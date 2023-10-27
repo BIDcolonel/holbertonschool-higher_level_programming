@@ -99,13 +99,21 @@ class Rectangle(Base):
 
     def update(self, *args, **kwargs):
         """Update method"""
-        if args is not None and len(args) != 0:
+        if args:
             list_atr = ['id', 'width', 'height', 'x', 'y']
             for index in range(len(args)):
                 setattr(self, list_atr[index], args[index])
         else:
-            for key, value in kwargs.items():
-                setattr(self, key, value)
+            if "id" in kwargs:
+                self.id = kwargs["id"]
+            if "width" in kwargs:
+                self.width = kwargs["width"]
+            if "height" in kwargs:
+                self.height = kwargs["height"]
+            if "x" in kwargs:
+                self.x = kwargs["x"]
+            if "y" in kwargs:
+                self.y = kwargs["y"]
 # above this line: Task 8 and 9
 
     def to_dictionary(self):
